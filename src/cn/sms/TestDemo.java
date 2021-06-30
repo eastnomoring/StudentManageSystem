@@ -192,7 +192,13 @@ public class TestDemo {
         while (true) {
             td.mainMenu();
             System.out.println("请输入对应数字进行操作：");
-            input = sc.nextInt();
+            try {
+                input = sc.nextInt();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("输入数据格式有误，不能有非数字的数据");
+                sc.next();
+                continue;
+            }
             if (input == 0) {
                 break;
             }
@@ -202,26 +208,40 @@ public class TestDemo {
                     while (true) {
                         td.banJiMenu();
                         System.out.println("请输入对应的数字对班级列表进行管理：");
-                        input1 = sc.nextInt();
+                        try {
+                            input1 = sc.nextInt();
+                        } catch (java.util.InputMismatchException e) {
+                            System.out.println("输入数据格式有误，不能有非数字的数据");
+                            sc.next();
+                            continue;
+                        }
                         if (input1 == 9)
                             break;
                         switch (input1) {
                             case 1:
                                 System.out.println("添加学生信息到主学生列表");
                                 System.out.println("请输入要添加的学生数量：");
-                                int count = sc.nextInt();
+                                int count = 0;
+                                try {
+                                    count = sc.nextInt();
+                                } catch (java.util.InputMismatchException e) {
+                                    System.out.println("输入数据格式有误，不能有非数字的数据");
+                                    sc.next();
+                                    continue;
+                                }
                                 for (int i = 1; i <= count; i++) {
                                     System.out.println("请输入第" + i + "个学生：");
                                     System.out.println("请输入学生的学号（例如s001）:");
                                     String strId = sc.next();
                                     System.out.println("请输入学生的姓名:");
                                     String strName = sc.next();
-                                    System.out.println("请输入语文成绩:");
-                                    float Chinese = sc.nextFloat();
-                                    System.out.println("请输入数学成绩:");
-                                    float Math = sc.nextFloat();
+                                    //System.out.println("请输入语文成绩:");
+                                    //float Chinese = sc.nextFloat();
+                                    //System.out.println("请输入数学成绩:");
+                                    //float Math = sc.nextFloat();
+                                    //Student student = new Student(strId, strName, Math, Chinese);
                                     //创建学生类的对象
-                                    Student student = new Student(strId, strName, Math, Chinese);
+                                    Student student = new Student(strId, strName);
                                     mainBanJi.addStudent(student);
                                     System.out.println("输入成功");
                                     System.out.println(student);
@@ -239,7 +259,15 @@ public class TestDemo {
                                     System.out.println("该班级不存在，请先将班级添加到学校中！");
                                 } else {
                                     System.out.println("请输入要添加的学生的数量：");
-                                    int count1 = sc.nextInt();
+                                    int count1 = 0;
+                                    try {
+                                        count1 = sc.nextInt();
+                                    } catch (java.util.InputMismatchException e) {
+                                        System.out.println("输入数据格式有误，不能有非数字的数据");
+                                        sc.next();
+                                        continue;
+                                    }
+
                                     for (int i = 1; i <= count1; i++) {
                                         System.out.println("请输入第" + i + "个学生：");
                                         System.out.println("请输入学生学号：");
@@ -251,13 +279,13 @@ public class TestDemo {
                                             System.out.println("该学生在主班级列表不存在，继续输入学生的其他信息！");
                                             System.out.println("请输入学生姓名：");
                                             String strName = sc.next();
-                                            System.out.println("请输入语文成绩:");
-                                            float Chinese = sc.nextFloat();
-                                            System.out.println("请输入数学成绩:");
-                                            float Math = sc.nextFloat();
+                                            //System.out.println("请输入语文成绩:");
+                                            //float Chinese = sc.nextFloat();
+                                            //System.out.println("请输入数学成绩:");
+                                            //float Math = sc.nextFloat();
                                             //创建一个学生对象
-                                            Student student1 = new Student(strId, strName, Math, Chinese);
-
+                                            //Student student1 = new Student(strId, strName, Math, Chinese);
+                                            Student student1 = new Student(strId, strName);
                                             YiBan.addStudent(student1);
                                             mainBanJi.addStudent(student1);
                                         } else {
@@ -303,9 +331,9 @@ public class TestDemo {
                                     System.out.println("该班级不存在！");
                                     break;
                                 } else {
-                                    Float fc4=0f;
+                                    Float fc4 = 0f;
                                     for (Student s : banJicase4.getStuList()) {
-                                        System.out.println(s+"语文："+s.getChinese());
+                                        System.out.println(s + "语文：" + s.getChinese());
                                         System.out.println("请输入学生的语文成绩:");
                                         fc4 = sc.nextFloat();
                                         banJicase4.insertChineseScore(s, fc4);
@@ -324,7 +352,7 @@ public class TestDemo {
                                 } else {
 
                                     for (Student s : banJicase5.getStuList()) {
-                                        System.out.println(s+"数学："+s.getMath());
+                                        System.out.println(s + "数学：" + s.getMath());
                                         System.out.println("请输入学生的数学成绩:");
                                         Float fc5 = sc.nextFloat();
                                         banJicase5.insertMathScore(s, fc5);
@@ -342,7 +370,7 @@ public class TestDemo {
                                 if (banJicase6 == null) {
                                     System.out.println("该班级不存在！");
                                     break;
-                                }else{
+                                } else {
                                     System.out.println("请输入要查询的学生学号：");
                                     String strId6 = sc.next();
                                     Student s = banJicase6.searchStudentByNum(strId6);
@@ -380,7 +408,14 @@ public class TestDemo {
                     while (true) {
                         td.schoolMenu();
                         System.out.println("请输入对应的数字对学校进行管理：");
-                        input2 = sc.nextInt();
+                        try {
+                            input2 = sc.nextInt();
+                        } catch (java.util.InputMismatchException e) {
+                            System.out.println("输入数据格式有误，不能有非数字的数据");
+                            sc.next();
+                            continue;
+                        }
+
                         if (input2 == 9)
                             break;
                         switch (input2) {

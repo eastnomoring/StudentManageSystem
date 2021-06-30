@@ -8,6 +8,14 @@ public class Student {
     private float math;
     private float chinese;
 
+    public Student() {
+    }
+
+    public Student(String stuNum, String stuName) {
+        setStuNum(stuNum);
+        setStuName(stuName);
+    }
+
     public Student(String stuNum, String stuName, float math, float chinese) {
         setStuNum(stuNum);
         setStuName(stuName);

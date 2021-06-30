@@ -9,6 +9,9 @@ public class BanJi {
     private String className;
     private List<Student> stuList;
 
+    public BanJi() {
+    }
+
     public BanJi(String className) {
         this.setClassName(className);
         stuList = new ArrayList<Student>();
